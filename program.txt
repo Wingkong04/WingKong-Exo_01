@@ -1,0 +1,68 @@
+from sympy.logic.boolalg import to_cnf, to_dnf
+from sympy.abc import symbols
+
+def table_de_verite(fonction, variables):
+    n = len(variables)
+    header = variables + [fonction]
+    print("\t".join(header))
+    for i in range(2**n):
+        ligne = [(i >> j) & 1 for j in range(n)]
+        resultat = int(eval(fonction, {variables[k]: ligne[k] for k in range(n)}))
+        ligne.append(resultat)
+        print("\t".join(map(str, ligne)))
+
+def formes_canoniques(fonction, variables):
+    symboles = symbols(variables)
+    expr = eval(fonction, {variables[i]: symboles[i] for i in range(len(variables))})
+    cnf = to_cnf(expr)
+    dnf = to_dnf(expr)
+    return cnf, dnf
+
+# Fonction logique pré-définie
+fonction_logique = "(A & B) | (~C & D)"
+variables = ['A', 'B', 'C', 'D']
+
+# Affichage de la table de vérité
+print("Table de vérité de la fonction logique :")
+table_de_verite(fonction_logique, variables)
+
+# Obtention des formes canoniques
+cnf, dnf = formes_canoniques(fonction_logique, variables)
+
+# Affichage des formes canoniques
+print("\nForme canonique conjonctive (CNF) :", cnf)
+print("Forme canonique disjonctive (DNF) :", dnf)
+from sympy.logic.boolalg import to_cnf, to_dnf
+from sympy.abc import symbols
+
+def table_de_verite(fonction, variables):
+    n = len(variables)
+    header = variables + [fonction]
+    print("\t".join(header))
+    for i in range(2**n):
+        ligne = [(i >> j) & 1 for j in range(n)]
+        resultat = int(eval(fonction, {variables[k]: ligne[k] for k in range(n)}))
+        ligne.append(resultat)
+        print("\t".join(map(str, ligne)))
+
+def formes_canoniques(fonction, variables):
+    symboles = symbols(variables)
+    expr = eval(fonction, {variables[i]: symboles[i] for i in range(len(variables))})
+    cnf = to_cnf(expr)
+    dnf = to_dnf(expr)
+    return cnf, dnf
+
+# Fonction logique pré-définie
+fonction_logique = "(A & B) | (~C & D)"
+variables = ['A', 'B', 'C', 'D']
+
+# Affichage de la table de vérité
+print("Table de vérité de la fonction logique :")
+table_de_verite(fonction_logique, variables)
+
+# Obtention des formes canoniques
+cnf, dnf = formes_canoniques(fonction_logique, variables)
+
+# Affichage des formes canoniques
+print("\nForme canonique conjonctive (CNF) :", cnf)
+print("Forme canonique disjonctive (DNF) :", dnf)
